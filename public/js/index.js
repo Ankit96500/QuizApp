@@ -22,13 +22,23 @@ async function loadQuiz() {
         console.log("questions if  block:", questions);
 
     } else {
-        const res = await fetch('https://opentdb.com/api.php?amount=10',{method:"GET"});
-        const data = await res.json();
-        questions = data.results;
-        console.log("questions else block:", questions);
+        const resposne = await fetch("http://localhost:3000/app/fetch-quizz-questions",{
+          method:"GET",
+          headers:{'Authorization':localStorage.getItem("token")}
+        });
+        console.log("response from fetchQuizzQuestions function",resposne);
+        if (resposne.ok) {
+            const data = await resposne.json();
+            questions = data.quizzQuestions.results;
+            console.log('=>', questions);
+            
+            const userAttempt = data.attempt
+            
+            // store questions in local storage:
+            localStorage.setItem("quizzQuestions",JSON.stringify(questions));
+            localStorage.setItem("userAttempt",JSON.stringify(userAttempt));
+        }
 
-        // stor questions in local storage:
-        localStorage.setItem("quizzQuestions",JSON.stringify(questions));
     }
     
     showQuestion();
@@ -60,7 +70,7 @@ function submitAnswer(answer) {
       currentQuestion++;
       userScored.innerHTML = `Score: ${score}`
       userDisplayQuestions.innerHTML = `Total Questions: ${currentQuestion + 1}/10`
-  }; 
+  }
   if (currentQuestion < questions.length) {  
     console.log('question length', currentQuestion);
     showQuestion();

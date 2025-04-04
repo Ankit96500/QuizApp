@@ -13,42 +13,31 @@ const app = express();
 app.use(express.static(path.join(process.cwd(),"public")));
 
 // connect 3rd parties
-app.use(bodyParser.json({ extended: false }));
+app.use(bodyParser.json());
+
 app.use(cors());
 
 // home url
 app.get('',(req,res)=>{
-    res.redirect('/client/index.html')
+    res.redirect('/account/userLogin.html')
   })
   
   
 // load routes
+import userRoutes from "./routes/userRoutes.js";
 
+app.use('/app',userRoutes);
 
-
-
-
-// rough work
-
-async function fetchData(url){
-  const data = await fetch(url,{method:"GET"});
-  const res = await data.json();
-  console.log(res,"response from fetchData function");
-
-};
-
-// fetchData("https://opentdb.com/api.php?amount=10")
 
 // import model
 import sequelize from "./config/database.js";
 import User from "./models/userModel.js";
+import Admin from"./models/adminModel.js";
 
-// establish association
 
 
 // connect database
-
-sequelize.sync({})
+sequelize.sync({force:false})
 .then((res)=>{
   app.listen(PORT,"localhost",()=>{
       console.log(`Server is running on http://localhost:${PORT}`);

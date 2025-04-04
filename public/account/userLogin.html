@@ -12,16 +12,16 @@
      <!-- error display -->
       <div id="custom-alert" style="display: none; background-color: red; color: white; padding: 10px; border-radius: 5px; margin: 15px 0;"></div>
 
-    <form id="login-form">
-      
+    <form id="user-registration-form">
+      <input type="text" id="name" placeholder="Name" required />
       <input type="email" id="email" placeholder="Email" required />
+      <input type="text"  id="location" placeholder="Location" required />
       
-      <input type="password" id="password" placeholder="password" required />
-      <button type="submit" id="postlogin">Login User</button>
+      <button type="submit" id="postlogin">User Registration</button>
 
     <!-- Forgot Password Link Styled as a Button -->
     
-      <a href="../account/passwordreset.html" id="forgot-password">Admin Login</a>
+      <a href="../account/adminLogin.html" id="admin-login">Admin Login</a>
     </form>
 
     <script src="../js/account.js"></script>
