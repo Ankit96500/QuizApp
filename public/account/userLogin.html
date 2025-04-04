@@ -6,6 +6,24 @@
     <title>user Login</title>
 </head>
 <body>
-    <h1>user login page</h1>
-</body>
+ 
+    <h1>Quizz Application</h1>
+    <h2>User Registration Page</h2>
+     <!-- error display -->
+      <div id="custom-alert" style="display: none; background-color: red; color: white; padding: 10px; border-radius: 5px; margin: 15px 0;"></div>
+
+    <form id="login-form">
+      
+      <input type="email" id="email" placeholder="Email" required />
+      
+      <input type="password" id="password" placeholder="password" required />
+      <button type="submit" id="postlogin">Login User</button>
+
+    <!-- Forgot Password Link Styled as a Button -->
+    
+      <a href="../account/passwordreset.html" id="forgot-password">Admin Login</a>
+    </form>
+
+    <script src="../js/account.js"></script>
+  </body>
 </html>

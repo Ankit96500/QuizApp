@@ -18,7 +18,7 @@ app.use(cors());
 
 // home url
 app.get('',(req,res)=>{
-    res.redirect('/client/account/login.html')
+    res.redirect('/client/index.html')
   })
   
   
@@ -37,43 +37,27 @@ async function fetchData(url){
 
 };
 
-fetchData("https://opentdb.com/api.php?amount=10")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// fetchData("https://opentdb.com/api.php?amount=10")
 
 // import model
 import sequelize from "./config/database.js";
-
+import User from "./models/userModel.js";
 
 // establish association
 
 
 // connect database
 
-app.listen(PORT,"localhost",()=>{
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
-// sequelize.sync()
-// .then((res)=>{
+sequelize.sync({})
+.then((res)=>{
+  app.listen(PORT,"localhost",()=>{
+      console.log(`Server is running on http://localhost:${PORT}`);
+  });
 
-// })
-// .catch((err)=>{
-//   console.log(err,"Error in database connection");  
-// });
+})
+.catch((err)=>{
+  console.log(err,"Error in database connection");  
+});
 
 
 
