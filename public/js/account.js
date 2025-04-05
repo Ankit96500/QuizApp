@@ -1,3 +1,4 @@
+let emailExist = document.getElementById('emailExist');
 
 
 document.getElementById('user-registration-form').addEventListener('submit',async function(e){
@@ -18,8 +19,14 @@ document.getElementById('user-registration-form').addEventListener('submit',asyn
             body:JSON.stringify(userData)
         });
         
-        if(response.ok){
-            const data = await response.json();
+        const data = await response.json();
+        // if user email already exist and their attempts also invalid: then show the message:
+        if(data.entry===false && data.status===false){
+            alert(`You have already attempted the quiz twice. Please contact the admin for further giudance`);
+
+            return;
+        }
+        if(data.status===true){
             // stored token in local storage:
             localStorage.setItem("token",data.token);
             console.log(data,"response from post request");
@@ -31,6 +38,19 @@ document.getElementById('user-registration-form').addEventListener('submit',asyn
     }
 
 });
+
+
+// this method is basically check if user already exist or not: if exixt redirect to quizz page
+
+if (localStorage.getItem("token")) {
+    // redirect to quizz page:
+    window.location.href = "../client/index.html";
+}
+
+
+
+
+
 
 
 

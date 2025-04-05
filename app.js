@@ -15,7 +15,9 @@ app.use(express.static(path.join(process.cwd(),"public")));
 // connect 3rd parties
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(cors({
+  origin: "*",
+}));
 
 // home url
 app.get('',(req,res)=>{
