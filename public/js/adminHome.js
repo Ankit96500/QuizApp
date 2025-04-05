@@ -1,4 +1,4 @@
-
+let noData = document.getElementById('noData');
 
 async function getUsersFromDb() {
     try {
@@ -8,7 +8,10 @@ async function getUsersFromDb() {
         
         if (response.ok) {
             const data = await response.json();
-
+         
+            if (data.users.length === 0) {
+                noData.innerHTML = "No Data Available";
+            }
             if (Array.isArray(data.users)) {
                 const tableBody = document.querySelector('#usersTable tbody');
                 tableBody.innerHTML = ""; // Clear any previous rows
