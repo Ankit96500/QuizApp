@@ -36,6 +36,14 @@ import sequelize from "./config/database.js";
 import User from "./models/userModel.js";
 import Admin from"./models/adminModel.js";
 
+//admin create when server starts:
+Admin.findOrCreate({
+  where:{
+    adminName:"admin",
+    password:"admin123"
+  }
+})
+
 
 
 // connect database

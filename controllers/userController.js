@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import Admin from "../models/adminModel.js";
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";    
 
@@ -48,12 +49,24 @@ export const UserRegistrationForm = async function(req,res){
 
 
 export const adminLogin = async function(req,res){
+    const { adminName,password} = req.body
+    try {
+        const admin = await Admin.findOne();
+        if (admin.adminName === adminName && admin.password === password) {
+            res.status(200).json({status:true});
+            
+        } else {
+            res.status(200).json({status:false});
+        }
+    } catch (error) {
+        console.log("an error occur:");
+        
+        res.status(500).json({ error: "server error occur" });
+    }
     
 };
 
-
-export const fetchQuizzQuestions = async function(req,res){
-    
+export const fetchQuizzQuestions = async function(req,res){    
     
     if (!req.user) {
         return res.status(401).json({message:"Unauthorized"});
@@ -110,9 +123,36 @@ export const updateUserInformation = async function(req,res){
 
 };
 
+export const adminHomePage = async function(req,res){
+    try {
+        const users = await User.findAll();
 
+        res.status(200).json({message:"user data fetched",users:users})
+    } catch  (error) {
+        console.log("an error occur:");
+        
+        res.status(500).json({ error: "Something went wrong" });
+    }
+};
 
+export const userDelete = async function(req,res){
+  
+    try {
+        const { userid } = req.params;
+        
+        const user = await User.destroy({ where: { id: userid } });
+        if (user) {
+            res.status(200).json({ status: true, message: "User deleted successfully" });
+        } else {
+            res.status(404).json({ status: false, message: "User not found" });
+        }
+    } catch (error) {
+        
+        console.log("an error occur:", error);
+        res.status(500).json({ status: false, message: "An error occurred" });
+    }
 
+};
 
 
 

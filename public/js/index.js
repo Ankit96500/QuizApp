@@ -89,7 +89,7 @@ function showQuestion() {
       const allAnswers = [...IncorrectAnswers,CorrectAnswer ].sort(() => Math.random());
       
       quizzDiv.innerHTML = `
-      <div class="question"><strong>Q${currentQuestion + 1}:</strong> ${q.question}</div>
+      <div class="question"><strong>Q${currentQuestion + 1}: </strong> ${q.question}</div>
       <div class="options">
       ${
         allAnswers.map(answer => `<button onclick='submitAnswer("${answer}")'>${answer}</button>`)
@@ -110,14 +110,14 @@ async function submitAnswer(answer) {
   if (answer === questions[currentQuestion].correct_answer) {
       score++; 
   }
-  userScored.innerHTML = `Score: ${score}`
-  currentQuestion++;
+  
+    userScored.innerHTML = `Score: ${score}`
+    currentQuestion++;
 
-  userDisplayQuestions.innerHTML = `Total Questions: ${Math.min(currentQuestion + 1,questions.length)}/10`
-
+    userDisplayQuestions.innerHTML = `Total Questions: ${Math.min(currentQuestion + 1,questions.length)}/10`
   // if user reached the last question:
   if (currentQuestion < questions.length ) {  
-      // console.log('currentquestionIndex => ', currentQuestion, 'question: => ',questions.length);
+    // console.log('currentquestionIndex => ', currentQuestion, 'question: => ',questions.length);
       showQuestion();
   } else {
       quizzDiv.innerHTML = `<h2>You scored ${score} out of ${questions.length}!</h2>`;
@@ -127,7 +127,7 @@ async function submitAnswer(answer) {
     
       try {
         
-          const response = await fetch("http://localhost:3000/app/update-user-information",{
+          await fetch("http://localhost:3000/app/update-user-information",{
           method:"POST",
           headers:{"Authorization":localStorage.getItem("token"),
                   "Content-Type":"application/json"},

@@ -1,6 +1,7 @@
+
 let emailExist = document.getElementById('emailExist');
 
-
+// user login function
 document.getElementById('user-registration-form').addEventListener('submit',async function(e){
     // handel form submit:
     const userData = {
@@ -22,7 +23,7 @@ document.getElementById('user-registration-form').addEventListener('submit',asyn
         const data = await response.json();
         // if user email already exist and their attempts also invalid: then show the message:
         if(data.entry===false && data.status===false){
-            alert(`You have already attempted the quiz twice. Please contact the admin for further giudance`);
+            alert(`You cannot take this quiz anymore`);
 
             return;
         }
@@ -41,11 +42,13 @@ document.getElementById('user-registration-form').addEventListener('submit',asyn
 
 
 // this method is basically check if user already exist or not: if exixt redirect to quizz page
-
 if (localStorage.getItem("token")) {
     // redirect to quizz page:
     window.location.href = "../client/index.html";
 }
+
+
+
 
 
 

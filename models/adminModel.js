@@ -10,7 +10,7 @@ Admin.init({
         autoIncrement:true,
         primaryKey:true,
     },
-    name:{
+    adminName:{
         type:DataTypes.STRING(50),
         allowNull:false,
     },
