@@ -31,7 +31,7 @@ document.getElementById('user-registration-form').addEventListener('submit',asyn
             // stored token in local storage:
             localStorage.setItem("token",data.token);
             console.log(data,"response from post request");
-            // redirect to quizz page:
+            // redirect to quiz page:
             window.location.href = "../client/index.html";
         }
     } catch (error) {
@@ -41,9 +41,9 @@ document.getElementById('user-registration-form').addEventListener('submit',asyn
 });
 
 
-// this method is basically check if user already exist or not: if exixt redirect to quizz page
+// this method is basically check if user already exist or not: if exixt redirect to quiz page
 if (localStorage.getItem("token")) {
-    // redirect to quizz page:
+    // redirect to quiz page:
     window.location.href = "../client/index.html";
 }
 
